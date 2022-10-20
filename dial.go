@@ -254,7 +254,10 @@ func verifyServerExtensions(copts *compressionOptions, h http.Header) (*compress
 			copts.serverNoContextTakeover = true
 			continue
 		}
-
+		if strings.HasPrefix(p, "server_max_window_bits") {
+			fmt.Println("server_max_window_bits:", p)
+			continue
+		}
 		return nil, fmt.Errorf("unsupported permessage-deflate parameter: %q", p)
 	}
 
